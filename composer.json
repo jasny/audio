@@ -1,0 +1,25 @@
+{
+    "name": "jasny/audio",
+    "description": "Process audio files using SoX",
+    "keywords": ["audio"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arnold Daniels",
+            "email": "arnold@jasny.net",
+            "homepage": "http://www.jasny.net"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/jasny/audio/issues",
+        "source": "https://github.com/jasny/audio"
+    },
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Jasny\\Audio": "src/"
+        }
+    }
+}

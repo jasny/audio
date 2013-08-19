@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Waveform using canvas</title>
+  </head>
+  <body>
+    <canvas id="waveform" width="1200" height="500"></canvas>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="js/waveform.js"></script>
+    <script type="text/javascript">
+        $.getJSON('waveform.php', { track: 'demo.wav' }).done(function (data) {
+            drawWaveform(document.getElementById('waveform'), data.samples, 1 / data.level);
+        });
+    </script>
+  </body>
+</html>

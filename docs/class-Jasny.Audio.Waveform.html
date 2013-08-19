@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class Jasny\Audio\Waveform | Jasny Audio · API documentation</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?515712668"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-Jasny.html">Jasny<span></span></a>
+						<ul>
+				<li class="active main"><a href="namespace-Jasny.Audio.html">Audio</a>
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-Jasny.Audio.Track.html">Track</a></li>
+				<li class="active"><a href="class-Jasny.Audio.Waveform.html">Waveform</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Jasny.Audio.html" title="Summary of Jasny\Audio"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Waveform</h1>
+
+
+	<div class="description">
+	
+<p>Plot a waveform</p>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Jasny.html">Jasny</a>\<a href="namespace-Jasny.Audio.html">Audio</a><br />
+		
+
+		<b>Located at</b> <a href="source-class-Jasny.Audio.Waveform.html#5-266" title="Go to source code">Jasny/Audio/Waveform.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-Jasny.Audio.Waveform.html#60-76" title="Go to source code">__construct</a>( <span><code><a href="class-Jasny.Audio.Track.html">Jasny\Audio\Track</a></code>|string <var>$track</var></span>, <span>array <var>$settings</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Class constructor</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Class constructor</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$track</var></dt>
+					<dd><code><code><a href="class-Jasny.Audio.Track.html">Jasny\Audio\Track</a></code>|string</code><br>$track Input track</dd>
+					<dt><var>$settings</var></dt>
+					<dd><code>array</code><br>$settings Associated array with settings</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getTrack" id="_getTrack">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-Jasny.Audio.Track.html">Jasny\Audio\Track</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getTrack">#</a>
+		<code><a href="source-class-Jasny.Audio.Waveform.html#78-86" title="Go to source code">getTrack</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the input audio track</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the input audio track</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-Jasny.Audio.Track.html">Jasny\Audio\Track</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSamples" id="_getSamples">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSamples">#</a>
+		<code><a href="source-class-Jasny.Audio.Waveform.html#142-152" title="Go to source code">getSamples</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the samples. Averaged to one sample per pixel.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the samples. Averaged to one sample per pixel.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getLength" id="_getLength">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getLength">#</a>
+		<code><a href="source-class-Jasny.Audio.Waveform.html#154-164" title="Go to source code">getLength</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the samples. Averaged to one sample per pixel.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the samples. Averaged to one sample per pixel.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getLevel" id="_getLevel">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getLevel">#</a>
+		<code><a href="source-class-Jasny.Audio.Waveform.html#166-176" title="Go to source code">getLevel</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the samples. Averaged to one sample per pixel.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the samples. Averaged to one sample per pixel.</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="plot" id="_plot">
+
+		<td class="attributes"><code>
+			 public 
+			resource
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_plot">#</a>
+		<code><a href="source-class-Jasny.Audio.Waveform.html#179-207" title="Go to source code">plot</a>( )</code>
+
+		<div class="description short">
+			
+<p>Plot the waveform</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Plot the waveform</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>resource</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="output" id="_output">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_output">#</a>
+		<code><a href="source-class-Jasny.Audio.Waveform.html#228-239" title="Go to source code">output</a>( <span>string <var>$format</var> = <span class="php-quote">'png'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Output the generated waveform</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Output the generated waveform</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$format</var></dt>
+					<dd><code>string</code><br>$format Options: png or json</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="width" id="$width">
+		<td class="attributes"><code>
+			public  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Jasny.Audio.Waveform.html#16-20" title="Go to source code"><var>$width</var></a>
+		</td>
+		<td class="value"><code><span class="php-num">800</span></code></td>
+		<td class="description"><div>
+			<a href="#$width" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Image width</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Image width</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="height" id="$height">
+		<td class="attributes"><code>
+			public  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Jasny.Audio.Waveform.html#22-26" title="Go to source code"><var>$height</var></a>
+		</td>
+		<td class="value"><code><span class="php-num">200</span></code></td>
+		<td class="description"><div>
+			<a href="#$height" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Image height</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Image height</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="color" id="$color">
+		<td class="attributes"><code>
+			public  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Jasny.Audio.Waveform.html#28-32" title="Go to source code"><var>$color</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'0000FF'</span></code></td>
+		<td class="description"><div>
+			<a href="#$color" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Color of the graph</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Color of the graph</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="axis" id="$axis">
+		<td class="attributes"><code>
+			public  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Jasny.Audio.Waveform.html#34-38" title="Go to source code"><var>$axis</var></a>
+		</td>
+		<td class="value"><code><span class="php-quote">'FF0000'</span></code></td>
+		<td class="description"><div>
+			<a href="#$axis" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Color of x axis</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Color of x axis</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="level" id="$level">
+		<td class="attributes"><code>
+			public  
+			float
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-Jasny.Audio.Waveform.html#40-44" title="Go to source code"><var>$level</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$level" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The max amplitute (y axis)</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The max amplitute (y axis)</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		Jasny Audio · API documentation API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
