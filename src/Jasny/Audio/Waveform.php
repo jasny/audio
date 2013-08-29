@@ -17,25 +17,25 @@ class Waveform
      * Image width
      * @var int
      */
-    public $width = 800;
+    public $width = 1800;
 
     /**
      * Image height
      * @var int
      */
-    public $height = 200;
+    public $height = 280;
 
     /**
      * Color of the graph
      * @var string
      */
-    public $color = '0000FF';
+    public $color = '000001';
 
     /**
      * Color of x axis
      * @var string
      */
-    public $axis = 'FF0000';
+    public $axis = null;
 
     /**
      * The max amplitute (y axis)
@@ -199,7 +199,7 @@ class Waveform
             imageline($im, $i / 2, $min, $i / 2, $max, $color);
         }
         
-        if ($this->axis != 'hide') {
+        if (!empty($this->axis)) {
             imageline($im, 0, $this->height / 2, $this->width, $this->height / 2, self::hex2color($im, $this->axis));
         }
         

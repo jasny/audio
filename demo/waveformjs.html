@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Demo using waveform.js</title>
+  </head>
+  <body>
+    <h1>Demo using waveform.js</h1>
+    <p>
+        <a href="http://waveformjs.org/">Waveform.js</a> makes drawing SoundCloud waveforms simple and lets you style
+        and color them the way you want it.
+    </p>
+    
+    <div id="waveform"></div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="js/waveform.js"></script>
+    <script type="text/javascript">
+        $.getJSON('waveform.php', { track: 'Sonar Kollektiv 3 - 04 - Forss - Flickermood.mp3', width: 550 }).done(function (data) {
+            console.log(data.samples);
+            var waveform = new Waveform({
+                container: document.getElementById("waveform"),
+                data: data.samples,
+                width: 550,
+                height: 50
+            });
+        });
+    </script>
+  </body>
+</html>

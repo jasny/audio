@@ -178,12 +178,25 @@ class Track
     /**
      * Get the file comments (annotations)
      * 
-     * @return string
+     * @param boolean $parse   Parse and return a value object
+     * @return string|object
      */
-    public function getAnnotations()
+    public function getAnnotations($parse=false)
     {
-        if (!isset($this->annotations)) $this->annotations = $this->soxi('-a');
-        return $this->annotations;
+        if (!isset($this->annotations)) $this->annotations = trim($this->soxi('-a'));
+        
+        if (!$parse) return $this->annotations;
+        
+        if (empty($this->annotations)) return (object)array();
+
+        $result = array();
+        foreach (explode("\n", $this->annotations) as $line) {
+            if (empty($line)) continue;
+            list($key, $value) = explode("=", $line, 2);
+            $result[strtolower($key)] = $value;
+        }
+        
+        return (object)$result;
     }
     
     
