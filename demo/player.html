@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Jasny Audio jPlayer demo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jplayer/2.6.0/skin/blue.monday/jplayer.blue.monday.css">
+        <style type="text/css">
+            .container {
+                width: 940px;
+                margin: 0 auto;
+            }
+            
+            .alert {
+                margin-top: 25px;
+            }
+            
+            div.jp-audio {
+                width: 100%;
+            }
+            
+            div.jp-audio div.waveform {
+                position: relative;
+                height: 120px;
+            }
+            
+            div.jp-audio div.waveform img {
+                width: 100%;
+                height: 100%;
+            }
+            
+            div.jp-audio div.waveform div.jp-progress {
+                background: none;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                width: auto;
+                height: auto;
+            }
+            
+            div.jp-audio div.waveform div.jp-seek-bar {
+                background: none;
+            }
+            
+            div.jp-audio div.waveform div.jp-play-bar {
+                background: rgba(0, 0, 0, 0.4);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div id="jquery_jplayer"></div>
+
+            <div id="jp_container_1" class="jp-audio">
+                <div class="jp-type-single">
+                    <div class="waveform">
+                        <img src="waveform.php?track=song.wav&height=120&width=1880&color=009BE3&axis=666666" alt="Waveform">
+                        <div class="jp-progress">
+                            <div class="jp-seek-bar">
+                                <div class="jp-play-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="jp-gui jp-interface">
+                        <ul class="jp-controls">
+                            <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+                            <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+                            <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
+                            <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
+                            <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+                            <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+                        </ul>
+                        <div class="jp-volume-bar">
+                            <div class="jp-volume-bar-value"></div>
+                        </div>
+                        <div class="jp-time-holder">
+                            <div class="jp-current-time"></div>
+                            <div class="jp-duration"></div>
+
+                            <ul class="jp-toggles">
+                                <li><a href="javascript:;" class="jp-repeat" tabindex="1" title="repeat">repeat</a></li>
+                                <li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="repeat off">repeat off</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="jp-details">
+                        <ul>
+                            <li><span class="jp-title"></span></li>
+                        </ul>
+                    </div>
+                    <div class="jp-no-solution">
+                        <span>Update Required</span>
+                        To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="alert">
+                Note: Seeking in jPlayer is not accurate enough for mp3 files. You should to convert mp3 to wav first.
+            </div>
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jplayer/2.6.0/jquery.jplayer.min.js"></script>
+
+        <script type="text/javascript">
+        //<![CDATA[
+            $(document).ready(function() {
+                $("#jquery_jplayer").jPlayer({
+                    ready: function(event) {
+                        $(this).jPlayer("setMedia", {
+                            title: "Flickermood",
+                            mp3: "tracks/song.wav"
+                        });
+                    },
+                    swfPath: "//cdnjs.cloudflare.com/ajax/libs/jplayer/2.6.0/Jplayer.swf",
+                    supplied: "mp3",
+                    wmode: "window",
+                    smoothPlayBar: true,
+                    keyEnabled: true,
+                    remainingDuration: true,
+                    toggleDuration: true
+                });
+            });
+        //]]>
+        </script>
+
+    </body>
+</html>

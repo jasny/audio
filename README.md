@@ -3,7 +3,7 @@ Jasny Audio
 
 Process audio files using [SoX](http://sox.sourceforge.net/)
 
-##Waveform##
+## Waveform
 
 With the Jasny\Audio\Waveform class you can create a waveform as PNG like:
 
@@ -14,9 +14,20 @@ $waveform = new Waveform($_GET['track'], $_GET);
 $waveform->output();
 ```
 
-Alternatively you can request a set of samples. Together waveform.js
+Alternatively you can request a set of samples. This can be used to set draw a wavefrom in JavaScript (see waveform.js).
 
-##Statistics##
+### Settings
+
+option | default  | description
+-------+----------+---------------------------
+width  | 1800     | Image width
+height | 280      | Image height
+color  | '000000' | Color of the graph
+axis   | null     | Color of the x axis
+level  | null     | The max amplitute (y axis)
+
+
+## Statistics
 
 ```json
 {

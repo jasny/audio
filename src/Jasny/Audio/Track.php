@@ -21,6 +21,13 @@ class Track
      */
     public static $soxi;
     
+    /**
+     * Path to avconv binary
+     * @var string
+     */
+    public static $avconv;
+    
+    
     /** @var string */
     public $filename;
     
@@ -150,7 +157,7 @@ class Track
      * 
      * @return int
      */
-    public function getChannels()
+    public function getChannelCount()
     {
         return $this->getStat('channels', '-c', 'int');
     }
@@ -160,7 +167,7 @@ class Track
      * 
      * @return int
      */
-    public function getSamples()
+    public function getSampleCount()
     {
         return $this->getStat('samples', '-s', 'int');
     }
@@ -213,6 +220,19 @@ class Track
     
     
     /**
+     * Convert the audio file (using avconv)
+     * 
+     * @param $filename  New filename
+     * @return Track
+     */
+    public function convert($filename)
+    {
+        $this->avconv($filename);
+        return new static($filename);
+    }
+    
+    
+    /**
      * Execute sox.
      * Each argument will be used in the command.
      * 
@@ -240,6 +260,18 @@ class Track
         return self::exec('soxi', $args);
     }
     
+    /**
+     * Execute avconv.
+     * Each argument will be used in the command.
+     * 
+     * @return string
+     */
+    public function avconv()
+    {
+        $args = array_merge(array('-i', $this->filename), func_get_args());
+        
+        return self::exec('avconv', $args);
+    }
     
     /**
      * Determine path to executable
@@ -248,7 +280,7 @@ class Track
      */
     public static function which($cmd)
     {
-        $path =& self::$$cmd;
+        $path =& self::${$cmd};
         
         if (!isset($path)) $path = trim(shell_exec('which ' . escapeshellarg($cmd)));
         if (empty($path) || !file_exists($path)) throw new \Exception("$cmd executable not foud");

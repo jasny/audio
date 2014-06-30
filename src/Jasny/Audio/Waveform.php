@@ -100,16 +100,17 @@ class Waveform
         $length = $this->track->getLength();
 
         $resample = '';
-        $sample_count = $this->track->getSamples();
+        $sample_count = $this->track->getSampleCount();
         
         // Downsample to max 500 samples per pixel with a minimum sample rate of 4k
         if ($sample_count / $this->width > 500) {
-            $rate = max(floor(($this->width / $length) * 500), 4000);
+            $rate = max(($this->width / $length) * 500, 4000);
             $resample = "-r $rate";
             $sample_count = $rate * $length;
         }
         
-        $chunk_size = ceil($sample_count / $this->width);
+        $chunk_size = floor($sample_count / $this->width);
+        //var_dump($chunk_size); die;
         
         $descriptorspec = array(
            1 => array("pipe", "w"),  // stdout
@@ -133,7 +134,7 @@ class Waveform
         
         $ret = proc_close($handle);
         if ($ret != 0) throw new \Exception("Sox command failed. " . trim($err));
-
+        
         $this->length = $length * ($this->width / count($samples));
         if (!isset($this->level)) $this->level = max(-1 * min($samples), max($samples));
         $this->samples = $samples;
