@@ -19,7 +19,7 @@ Alternatively you can request a set of samples. This can be used to set draw a w
 ### Settings
 
 option | default  | description
--------+----------+---------------------------
+------ | -------- | --------------------------
 width  | 1800     | Image width
 height | 280      | Image height
 color  | '000000' | Color of the graph
