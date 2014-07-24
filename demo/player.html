@@ -6,7 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jplayer/2.6.0/skin/blue.monday/jplayer.blue.monday.css">
+	<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
         <style type="text/css">
+            body {
+                font-family: 'Lato', sans-serif;
+                font-size: 14px;
+            }
+
             .container {
                 width: 940px;
                 margin: 0 auto;
@@ -56,7 +62,7 @@
             <div id="jp_container_1" class="jp-audio">
                 <div class="jp-type-single">
                     <div class="waveform">
-                        <img src="waveform.php?track=song.wav&height=120&width=1880&color=009BE3&axis=666666" alt="Waveform">
+                        <img src="waveform.php?track=song.mp3&height=120&width=1880&color=009BE3&axis=666666" alt="Waveform">
                         <div class="jp-progress">
                             <div class="jp-seek-bar">
                                 <div class="jp-play-bar"></div>
@@ -98,7 +104,7 @@
             </div>
             
             <div class="alert">
-                Note: Seeking in jPlayer is not accurate enough for mp3 files. You should to convert mp3 to wav first.
+                Note: Seeking in jPlayer is not always accurate for compressed formats like mp3. Consider converting the track to a .wav file.
             </div>
         </div>
 
@@ -112,12 +118,11 @@
                     ready: function(event) {
                         $(this).jPlayer("setMedia", {
                             title: "Flickermood",
-                            mp3: "tracks/song.wav"
+                            mp3: "tracks/song.mp3"
                         });
                     },
                     swfPath: "//cdnjs.cloudflare.com/ajax/libs/jplayer/2.6.0/Jplayer.swf",
-                    supplied: "mp3",
-                    wmode: "window",
+	            supplied: "mp3",
                     smoothPlayBar: true,
                     keyEnabled: true,
                     remainingDuration: true,
