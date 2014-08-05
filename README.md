@@ -18,15 +18,15 @@ Alternatively you can request a set of samples. This can be used to set draw a w
 
 ### Settings
 
-option   | default | unit     | description
----------|---------|----------|-----------------------------------------
-width    | 1800    | pixels   | Image width
-height   | 280     | pixels   | Image height
-color    | 000000  | hex|rgba | Color of the graph
-axis     | null    | hex|rgba | Color of the x axis
-level    | null    |          | The max amplitute (y axis)
-offset   | null    | seconds  | Starting point. Negative counts from end
-duration | null    | seconds  | Duration of the track of chart
+option   | default | unit        | description
+---------|---------|-------------|-----------------------------------------
+width    | 1800    | pixels      | Image width
+height   | 280     | pixels      | Image height
+color    | 000000  | hex or rgba | Color of the graph
+axis     | null    | hex or rgba | Color of the x axis
+level    | null    |             | The max amplitute (y axis)
+offset   | null    | seconds     | Starting point. Negative counts from end
+duration | null    | seconds     | Duration of the track of chart
 
 
 ## Track statistics
