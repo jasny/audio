@@ -10,25 +10,28 @@ namespace Jasny\Audio;
 class Track
 {
     /**
-     * Path to sox binary
+     * sox executable
      * @var string
      */
-    public static $sox;
+    public static $sox = 'sox';
     
     /**
-     * Path to soxi binary
+     * soxi executable
      * @var string
      */
-    public static $soxi;
+    public static $soxi = 'soxi';
     
     /**
-     * Path to avconv binary
+     * avconv or ffmpeg executable
      * @var string
      */
-    public static $avconv;
+    public static $avconv = 'avconv';
     
     
-    /** @var string */
+    /**
+     * Path to the track
+     * @var string
+     */
     public $filename;
     
     
@@ -36,7 +39,7 @@ class Track
     protected $stats;
     
     /** @var int */
-    protected $sample_rate;
+    protected $sampleRate;
     
     /** @var int */
     protected $channels;
@@ -190,7 +193,9 @@ class Track
      */
     public function getAnnotations($parse=false)
     {
-        if (!isset($this->annotations)) $this->annotations = trim($this->soxi('-a'));
+        if (!isset($this->annotations)) {
+            $this->annotations = trim($this->soxi('-a'));
+        }
         
         if (!$parse) return $this->annotations;
         
@@ -274,18 +279,13 @@ class Track
     }
     
     /**
-     * Determine path to executable
+     * Get executable
      * 
      * @return string
      */
     public static function which($cmd)
     {
-        $path =& self::${$cmd};
-        
-        if (!isset($path)) $path = trim(shell_exec('which ' . escapeshellarg($cmd)));
-        if (empty($path) || !file_exists($path)) throw new \Exception("$cmd executable not foud");
-        
-        return $path;
+        return escapeshellcmd(self::${$cmd});
     }
     
     /**
@@ -297,7 +297,7 @@ class Track
      */
     protected static function exec($cmd, $args)
     {
-        $command = escapeshellcmd(self::which($cmd)) . ' ' . join(' ', array_map('escapeshellarg', $args));
+        $command = self::which($cmd) . ' ' . join(' ', array_map('escapeshellarg', $args));
         
         $descriptorspec = array(
            1 => array("pipe", "w"),  // stdout
