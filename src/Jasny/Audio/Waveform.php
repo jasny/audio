@@ -12,7 +12,7 @@ class Waveform
      * @var Track
      */
     protected $track;
-
+    
     /**
      * Image width
      * @var int
@@ -29,7 +29,7 @@ class Waveform
      * Color of the graph
      * @var string
      */
-    public $color = '000001';
+    public $color = '000000';
 
     /**
      * Color of x axis
@@ -42,6 +42,18 @@ class Waveform
      * @var float
      */
     public $level;
+
+    /**
+     * The offset where to start (in seconds)
+     * @var int
+     */
+    public $offset;
+    
+    /**
+     * The duration to chart (in seconds)
+     * @var int
+     */
+    public $duration;
     
 
     /**
@@ -87,7 +99,7 @@ class Waveform
 
     
     /**
-     * Calculate the min and max sample per pixel using sox.
+     * Calculate the samples.
      * 
      * @return array
      */
@@ -95,29 +107,58 @@ class Waveform
     {
         if (!file_exists($this->track)) throw new \Exception("File '{$this->track}' doesn't exist");
 
-        $sox = escapeshellcmd(Track::which('sox'));
-        $track = escapeshellarg($this->track);
         $length = $this->track->getLength();
-
-        $resample = '';
+        $rate = null;
         $sample_count = $this->track->getSampleCount();
+
+        $trim = null;
+        if ($this->offset || $this->duration) {
+            $offset = $this->offset >= 0 ? $this->offset : $length + $this->offset;
+            $trim = $offset . ($this->duration ? " " . (float)$this->duration : '');
+            
+            $newlength = $this->duration ?: $length - $offset;
+            $sample_count = floor(($newlength / $length) * $sample_count);
+            $length = $newlength;
+        }
         
-        // Downsample to max 500 samples per pixel with a minimum sample rate of 4k
+        // Downsample to max 500 samples per pixel with a minimum sample rate of 4k/s
         if ($sample_count / $this->width > 500) {
             $rate = max(($this->width / $length) * 500, 4000);
-            $resample = "-r $rate";
             $sample_count = $rate * $length;
         }
         
+        $this->length = $length;
+        
+        $this->samples = $this->calcExecute($sample_count, $trim, $rate);
+        
+        if (!isset($this->level)) {
+            $this->level = max(-1 * min($this->samples), max($this->samples));
+        }
+    }
+    
+    /**
+     * Calculate the samples
+     * 
+     * @param int $sample_count
+     * @param string $trim
+     * @param float  $rate
+     * @return array
+     */
+    protected function calcExecute($sample_count, $trim, $rate)
+    {
+        $track = escapeshellarg($this->track);
+        if ($trim) $trim = "trim $trim";
+        $resample = $rate ? "-r $rate" : '';
         $chunk_size = floor($sample_count / $this->width);
-        //var_dump($chunk_size); die;
         
         $descriptorspec = array(
-           1 => array("pipe", "w"),  // stdout
-           2 => array("pipe", "w")   // stderr
+           1 => array("pipe", "w"), // stdout
+           2 => array("pipe", "w")  // stderr
         );
         
-        $handle = proc_open("$sox $track -t raw $resample -c 1 -e floating-point -L -", $descriptorspec, $pipes);
+        $sox = escapeshellcmd(Track::which('sox'));
+        
+        $handle = proc_open("$sox $track -t raw $resample -c 1 -e floating-point -L - $trim", $descriptorspec, $pipes);
         if (!$handle) throw new \Exception("Failed to get the samples using sox");
 
         $chunk = array();
@@ -134,15 +175,12 @@ class Waveform
         
         $ret = proc_close($handle);
         if ($ret != 0) throw new \Exception("Sox command failed. " . trim($err));
-        
-        $this->length = $length * ($this->width / count($samples));
-        if (!isset($this->level)) $this->level = max(-1 * min($samples), max($samples));
-        $this->samples = $samples;
+                
+        return $samples;
     }
 
     /**
      * Get the samples.
-     * Averaged to one sample per pixel.
      *
      * @return array
      */
@@ -153,8 +191,7 @@ class Waveform
     }
 
     /**
-     * Get the samples.
-     * Averaged to one sample per pixel.
+     * Get the length of the track.
      *
      * @return array
      */
@@ -165,8 +202,7 @@ class Waveform
     }
 
     /**
-     * Get the samples.
-     * Averaged to one sample per pixel.
+     * Get the level (max amplitude).
      *
      * @return array
      */
@@ -187,21 +223,22 @@ class Waveform
         $this->getSamples();
         
         $im = imagecreatetruecolor($this->width, $this->height);
-        imagecolortransparent($im, imagecolorallocate($im, 0, 0, 0));
-        
+        imagesavealpha($im, true);
+        imagefill($im, 0, 0, imagecolorallocatealpha($im, 0, 0, 0, 127));
+
         $center = ($this->height / 2);
         $scale = ($center / $this->level);
-        $color = self::hex2color($im, $this->color);
+        $color = self::strToColor($im, $this->color);
         
         for ($i = 0, $n = count($this->samples); $i < $n-1; $i += 2) {
-            $min = $center + ($this->samples[$i] * $scale);
-            $max = $center + ($this->samples[$i+1] * $scale);
+            $max = $center + (-1 * $this->samples[$i] * $scale);
+            $min = $center + (-1 * $this->samples[$i+1] * $scale);
             
             imageline($im, $i / 2, $min, $i / 2, $max, $color);
         }
         
         if (!empty($this->axis)) {
-            imageline($im, 0, $this->height / 2, $this->width, $this->height / 2, self::hex2color($im, $this->axis));
+            imageline($im, 0, $this->height / 2, $this->width, $this->height / 2, self::strToColor($im, $this->axis));
         }
         
         return $im;
@@ -212,17 +249,23 @@ class Waveform
      *
      * @param resource $im
      * @param string   $color
-     * @return resource
+     * @return int
      */
-    protected static function hex2color($im, $color)
+    protected static function strToColor($im, $color)
     {
         $color = ltrim($color, '#');
-
-        $red = hexdec(substr($color, 0, 2));
-        $green = hexdec(substr($color, 2, 2));
-        $blue = hexdec(substr($color, 4, 2));
-
-        return imagecolorallocate($im, $red, $green, $blue);
+        
+        if (strpos($color, ',') !== false) {
+            list($red, $green, $blue, $opacity) = explode(',', $color) + [3 => null];
+        } else {
+            $red = hexdec(substr($color, 0, 2));
+            $green = hexdec(substr($color, 2, 2));
+            $blue = hexdec(substr($color, 4, 2));
+            $opacity = 1;
+        }
+        
+        $alpha = round((1 - $opacity) * 127);
+        return imagecolorallocatealpha($im, $red, $green, $blue, $alpha);
     }
 
 

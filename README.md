@@ -10,7 +10,7 @@ With the Jasny\Audio\Waveform class you can create a waveform as PNG like:
 ![waveform](https://f.cloud.github.com/assets/100821/1049488/8c209342-10a6-11e3-9149-cc56e1fcfcea.png)
 
 ```php
-$waveform = new Waveform($_GET['track'], $_GET);
+$waveform = new Waveform($filename, $options);
 $waveform->output();
 ```
 
@@ -18,16 +18,22 @@ Alternatively you can request a set of samples. This can be used to set draw a w
 
 ### Settings
 
-option | default  | description
------- | -------- | --------------------------
-width  | 1800     | Image width
-height | 280      | Image height
-color  | '000000' | Color of the graph
-axis   | null     | Color of the x axis
-level  | null     | The max amplitute (y axis)
+option   | default | unit     | description
+---------|---------|----------|-----------------------------------------
+width    | 1800    | pixels   | Image width
+height   | 280     | pixels   | Image height
+color    | 000000  | hex|rgba | Color of the graph
+axis     | null    | hex|rgba | Color of the x axis
+level    | null    |          | The max amplitute (y axis)
+offset   | null    | seconds  | Starting point. Negative counts from end
+duration | null    | seconds  | Duration of the track of chart
 
 
-## Statistics
+## Track statistics
+```php
+$track = new Track($filename);
+$track->getStats();
+```
 
 ```json
 {
@@ -62,4 +68,13 @@ level  | null     | The max amplitute (y axis)
     volume_adjustment: "6.168",
     sample_rate: "22050"
 }
+```
+
+## Convert track
+
+You can convert a track to a different format. Uses avconv (or ffmpeg).
+
+```php
+$track = new Track("sometrack.wav");
+$track->convert("sometrack.mp3");
 ```
