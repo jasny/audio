@@ -236,6 +236,22 @@ class Track
         return new static($filename);
     }
     
+    /**
+     * Combine two audio files
+     * 
+     * @param string       $method  'concatenate', 'merge', 'mix', 'mix-power', 'multiply', 'sequence'
+     * @param string|Track $in      File to mix with
+     * @param string       $out     New filename
+     * @return Track
+     */
+    public function combine($method, $in, $out)
+    {
+        if ($in instanceof self) $in = $in->filename;
+
+        $this->sox('--combine', $method, $in, $out);
+        return new static($out);
+    }
+    
     
     /**
      * Execute sox.

@@ -72,9 +72,27 @@ $track->getStats();
 
 ## Convert track
 
-You can convert a track to a different format. Uses avconv (or ffmpeg).
+Convert a track to a different format. Uses avconv (or ffmpeg).
 
 ```php
 $track = new Track("sometrack.wav");
 $track->convert("sometrack.mp3");
+```
+
+
+## Combine tracks
+
+Combine two tracks. Uses [`sox --combine`](http://sox.sourceforge.net/sox.html#OPTIONS).
+
+Available methods
+ * concatenate
+ * merge
+ * mix
+ * mix-power
+ * multiply
+ * sequence
+
+```php
+$track = new Track($track1);
+$track->combine($method, $track2, $outputFilename);
 ```
