@@ -321,13 +321,13 @@ class Track
         );
 
         $handle = proc_open($command, $descriptorspec, $pipes);
-        if (!$handle) throw new \Exception("Failed to run sox command");
+        if (!$handle) throw new AudioException("Failed to run sox command");
         
         $out = stream_get_contents($pipes[1]);
         $err = stream_get_contents($pipes[2]);
         
         $ret = proc_close($handle);
-        if ($ret != 0) throw new \Exception("$cmd command failed. " . trim($err));
+        if ($ret != 0) throw new AudioException("$cmd command failed. " . trim($err));
 
         return $out ?: $err;
     }
