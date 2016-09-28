@@ -35,7 +35,7 @@ $track = new Track($filename);
 $track->getStats();
 ```
 
-```json
+```js
 {
     channels: "1",
     dc_offset: "0.000016",
