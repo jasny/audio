@@ -256,7 +256,7 @@ class Waveform
         $color = ltrim($color, '#');
         
         if (strpos($color, ',') !== false) {
-            list($red, $green, $blue, $opacity) = explode(',', $color) + [3 => null];
+            list($red, $green, $blue, $opacity) = explode(',', $color) + array(3 => null);
         } else {
             $red = hexdec(substr($color, 0, 2));
             $green = hexdec(substr($color, 2, 2));
