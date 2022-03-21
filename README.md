@@ -14,7 +14,7 @@ $waveform = new Waveform($filename, $options);
 $waveform->output();
 ```
 
-Alternatively you can request a set of samples. This can be used to set draw a wavefrom in JavaScript (see waveform.js).
+Alternatively you can request a set of samples. This can be used to set draw a waveform in JavaScript (see waveform.js).
 
 ### Options
 
